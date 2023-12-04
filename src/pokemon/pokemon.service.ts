@@ -73,10 +73,13 @@ export class PokemonService {
   }
   //para eliminar un pokemon
   async remove(id: string) {
-    const pokemon = await this.findOne(id);
-    await pokemon.deleteOne();
+    // const pokemon = await this.findOne(id);
+    // await pokemon.deleteOne();
+    // return { id };
+    const result = this.pokemonModel.findByIdAndDelete(id);
+    return result;
   }
-  //exceptiones no controladas
+  //excepciones no controladas
   private handleExceptions(error: any) {
     if (error.code === 11000) {
       throw new BadRequestException(
