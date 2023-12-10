@@ -31,7 +31,19 @@ export class PokemonService {
   }
 
   findAll(paginationDto: PaginationDto) {
-    return this.pokemonModel.find().limit(5).skip(5);
+    const { limit = 10, offset = 0 } = paginationDto;
+    return (
+      this.pokemonModel
+        .find()
+        .limit(limit)
+        .skip(offset)
+        //ordena la columna no de manera ascendete
+        .sort({
+          no: 1,
+        })
+        //para que el endpoint no me traiga alguna columna en especifico
+        .select('-__v')
+    );
   }
 
   async findOne(term: string) {
