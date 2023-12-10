@@ -25,10 +25,9 @@ export class PokemonController {
   }
 
   @Get()
-  //usare el decorador Query para obtener todos los query parameters
+  //usare el decorador Query para obtener todos los query parameters que se encuentratn en mi paginationDto
   findAll(@Query() paginationDto: PaginationDto) {
-    console.log(paginationDto);
-    return this.pokemonService.findAll();
+    return this.pokemonService.findAll(paginationDto);
   }
 
   @Get(':term')
